@@ -69,4 +69,32 @@ const allUsers = asyncHandler(async(req, res) => {
     res.send(users);
 });
 
-module.exports = { registerUser, authUser, allUsers };
+// Get all users
+// const getUsers = asyncHandler(async (req, res) => {
+//   const users = await User.find({});
+//   const userArray = users.map((user) => ({
+//     _id: user._id,
+//     name: user.name,
+//     email: user.email,
+//     pic: user.pic,
+//   }));
+//   res.send(userArray);
+// });
+const getUsers = asyncHandler(async(req, res) => {
+  const { username } = req.body;
+
+  const users = await User.find({ username });
+
+  if (users.length === 0) {
+    res.status(404);
+    throw new Error('Username does not exist'.red);
+  } else {
+    res.status(200).json({
+      success: true
+    });
+  }
+});
+
+
+
+module.exports = { registerUser, authUser, allUsers,getUsers };

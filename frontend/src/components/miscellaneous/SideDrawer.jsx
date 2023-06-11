@@ -65,6 +65,7 @@ const SideDrawer = () => {
   }
 
   const accessChat = async (userId) => {
+    
     try {
       setLoadingChat(true);
 
@@ -92,6 +93,7 @@ const SideDrawer = () => {
       })
     }
   }
+  
 
   return (
     <>
@@ -113,16 +115,15 @@ const SideDrawer = () => {
         </Button>
       </Tooltip>
       <Text fontSize={"2xl"} fontFamily="poppins">
-        Talk-a-Tive
+        Crawle Chat Portal
       </Text>
       <div>
         <Menu>
           <MenuButton
             padding="1"
           >
-         
-      <FontAwesomeIcon  icon={faBell}/>
-            
+         {!notification.length ? (<FontAwesomeIcon  icon={faBell}/>) : <FontAwesomeIcon icon={faBell} shake style={{color: "#ff1d1d",}} />}
+
           </MenuButton>
           <MenuList paddingLeft={5}>
             {!notification.length && "No New Messages"}

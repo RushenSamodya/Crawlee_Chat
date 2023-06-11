@@ -68,23 +68,25 @@ const Login = () => {
     <Container>
       <VStack>
       <FormControl id="email" isRequired>
-        <FormLabel>Email</FormLabel>
+        <FormLabel color="black">Email</FormLabel>
         <Input
           type="email"
           placeholder="Enter your email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          color="black"
         />
       </FormControl>
 
       <FormControl id="password" isRequired>
-        <FormLabel>Password</FormLabel>
+        <FormLabel color="black">Password</FormLabel>
         <InputGroup>
         <Input
           type={show? "text":"password"}
           placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          color="black"
         />
         <InputRightElement width="4.5rem" onClick={handleClick}>
             <Button h="1.75rem" size="sm">
@@ -95,7 +97,7 @@ const Login = () => {
       </FormControl>
 
       <Button 
-      colorScheme="green"
+      colorScheme='orange'
       width="100%"
       style={{marginTop: 15}}
       onClick={submitHandler}
@@ -105,7 +107,7 @@ const Login = () => {
       </Button>
 
       <Button 
-      colorScheme="red"
+      colorScheme='orange'
       width="100%"
       variant="solid"
       onClick={enterGuestCredentials}

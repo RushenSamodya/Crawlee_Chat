@@ -29,8 +29,8 @@ const HomePagel = () => {
         borderRadius="lg"
         borderWidth="2px"
       >
-        <Text color="white" fontSize="4xl" fontFamily="poppins">
-          Talk-A-Tive
+        <Text color="Black" fontSize="4xl" fontFamily="poppins">
+          Crawlee Chat Portal
         </Text>
       </Box>
       <Box
@@ -40,9 +40,9 @@ const HomePagel = () => {
         borderWidth="2px"
         color="white"
       >
-        <Tabs variant="soft-rounded" colorScheme="green">
+        <Tabs variant="soft-rounded" colorScheme="orange">
           <TabList marginBottom="1em">
-            <Tab width="50%">LOGIN</Tab>
+            <Tab width="50%" >LOGIN</Tab>
             <Tab width="50%">SIGN-UP</Tab>
           </TabList>
           <TabPanels>

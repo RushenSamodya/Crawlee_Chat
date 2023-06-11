@@ -115,7 +115,7 @@ try {
 
 } catch (error) {
   toast({
-          title: 'Please select an image',
+          title: 'User already exists',
           status: 'warning',
           duration: 5000,
           isClosable: true,
@@ -128,30 +128,33 @@ try {
   return (
     <VStack>
       <FormControl id="email" isRequired>
-        <FormLabel>Email</FormLabel>
+        <FormLabel color="black">Email</FormLabel>
         <Input
           type="email"
           placeholder="Enter your email address"
           onChange={(e) => setEmail(e.target.value)}
+          color="black"
         />
       </FormControl>
 
       <FormControl id="name" isRequired>
-        <FormLabel>Name</FormLabel>
+        <FormLabel color="black">Name</FormLabel>
         <Input
           type="text"
           placeholder="Enter your name"
           onChange={(e) => setName(e.target.value)}
+          color="black"
         />
       </FormControl>
 
       <FormControl id="password" isRequired>
-        <FormLabel>Password</FormLabel>
+        <FormLabel color="black">Password</FormLabel>
         <InputGroup>
         <Input
           type={show? "text":"password"}
           placeholder="Enter your password"
           onChange={(e) => setPassword(e.target.value)}
+          color="black"
         />
         <InputRightElement width="4.5rem" onClick={handleClick}>
             <Button h="1.75rem" size="sm">
@@ -162,12 +165,13 @@ try {
       </FormControl>
 
       <FormControl id="confirmpassword" isRequired>
-        <FormLabel>Confirm Password</FormLabel>
+        <FormLabel color="black">Confirm Password</FormLabel>
         <InputGroup>
         <Input
           type={show? "text":"password"}
           placeholder="Enter your password again"
           onChange={(e) => setConfirmPassword(e.target.value)}
+          color="black"
         />
         <InputRightElement width="4.5rem" onClick={handleClick}>
             <Button h="1.75rem" size="sm">
@@ -179,17 +183,18 @@ try {
       </FormControl>
 
       <FormControl id="pic" >
-        <FormLabel>Upload Your Picture</FormLabel>
+        <FormLabel color="black">Upload Your Picture</FormLabel>
         <Input
           type="file"
           placeholder="Pic here..."
           accept="image/*"
           onChange={(e) => postDetails(e.target.files[0])}
+          color="black"
         />
       </FormControl>
 
       <Button 
-      colorScheme="green"
+      colorScheme="orange"
       width="100%"
       style={{marginTop: 15}}
       onClick={submitHandler}
