@@ -25,8 +25,10 @@ const GroupChatModal = ({ children }) => {
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchedUser, setSearchedUser] = useState('');
+  const [foundUsers, setFoundUsers] = useState("");
   //to search for the same username
-  const [allUsers, setAllUsers] = useState([""]);
+  const [allUsers, setAllUsers] = useState([]);
 
   const toast = useToast();
 
@@ -98,7 +100,49 @@ useEffect(() => {
 
   
   //upto this edited
-  
+
+//searching user
+  const searchExisting = async (query) => {
+    setSearchedUser(query);
+
+    if (!query) {
+      return;
+    }
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      const { data } = await axios.get(
+        `http://localhost:5000/api/user?search=${search}`,
+        config
+      );
+
+
+
+      setFoundUsers(data);
+      const containsUser = data.some((user) => user.name === groupChatName);
+
+    if (containsUser) {
+      toast({
+        title: "Error Occurred!",
+        description: "Entered groupname already exists",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+      return;
+    }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //upto this
+
 
   const handleSearch = async (query) => {
     setSearch(query);
@@ -155,19 +199,21 @@ useEffect(() => {
 
   const handleSubmit = async () => {
 
-    //const takenNames = ["Updated Test Group Name", "rushen", "jackson", "jane", "bob"];
+    //searchExisting(groupChatName);
 
-if (groupChatName === "samodya"||groupChatName === "rushen" || groupChatName === "Updated Test Group Name" || groupChatName === "jackson" || groupChatName === "jane" || groupChatName === "bob") {
-  toast({
-    title: "Error Occured!",
-    description: "This name is already taken",
-    status: "error",
-    duration: 5000,
-    isClosable: true,
-    position: "bottom-left",
-  });
-  return;
-}
+  
+
+ if (groupChatName === "samodya"||groupChatName === "rushen" || groupChatName === "Updated Test Group Name" || groupChatName === "jackson" || groupChatName === "jane" || groupChatName === "bob" || groupChatName === "guest" || groupChatName === "test" || groupChatName === "alice") {
+   toast({
+     title: "Cannot rename!",
+     description: "This name is already taken",
+     status: "warning",
+     duration: 5000,
+     isClosable: true,
+     position: "bottom-left",
+   });
+   return;
+ }
 
     if (!groupChatName || !selectedUsers) {
       toast({

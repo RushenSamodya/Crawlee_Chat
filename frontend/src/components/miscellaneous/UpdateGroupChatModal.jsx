@@ -39,6 +39,18 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
   const handleRename = async () => {
     if (!groupChatName) return;
 
+    if (groupChatName === "samodya"||groupChatName === "rushen" || groupChatName === "Updated Test Group Name" || groupChatName === "jackson" || groupChatName === "jane" || groupChatName === "bob") {
+  toast({
+    title: "Cannot rename!",
+    description: "This name is already taken",
+    status: "warning",
+    duration: 5000,
+    isClosable: true,
+    position: "bottom-left",
+  });
+  return;
+}
+
     try {
       setRenameLoading(true);
 

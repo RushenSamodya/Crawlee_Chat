@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay, Input, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Spinner, Text, Tooltip, useDisclosure, useToast } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faBell, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { ChatState } from "../../context/ChatProvider";
@@ -9,6 +9,7 @@ import axios from "axios";
 import ChatLoading from "../ChatLoading";
 import UserListItem from "../userAvatar/UserListItem";
 import { getSender } from "../../config/ChatLogics";
+import { NavLink } from "react-router-dom";
 
 
 const SideDrawer = () => {
@@ -93,6 +94,25 @@ const SideDrawer = () => {
       })
     }
   }
+
+  const notificationToast = () => {
+      if(notification.length){
+        toast({
+          title: "New Message Recieved",
+          description: "You have a new message",
+          status: "success",
+          duration: 6000,
+          isClosable: true,
+          position: "top"
+        })
+      }
+  }
+
+  useEffect(() => {
+    notificationToast();
+  },[notification])
+  
+
   
 
   return (
@@ -117,10 +137,18 @@ const SideDrawer = () => {
       <Text fontSize={"2xl"} fontFamily="poppins">
         Crawle Chat Portal
       </Text>
+      <NavLink to="http://localhost:3000/">
+        <Tooltip label="Go to back to the crawlee home page" hasArrow placement="bottom">
+      <Button >
+        Home
+      </Button>
+      </Tooltip>
+      </NavLink>
       <div>
         <Menu>
           <MenuButton
             padding="1"
+            marginRight="6"
           >
          {!notification.length ? (<FontAwesomeIcon  icon={faBell}/>) : <FontAwesomeIcon icon={faBell} shake style={{color: "#ff1d1d",}} />}
 
@@ -142,7 +170,7 @@ const SideDrawer = () => {
             ))}
           </MenuList>
         </Menu>
-        <Menu>
+        <Menu marginLeft="10">
           <MenuButton
             as={Button}
             rightIcon={<FontAwesomeIcon icon={faChevronDown} />}
@@ -154,7 +182,7 @@ const SideDrawer = () => {
             src={user.pic}
             />
           </MenuButton>
-          <MenuList>
+          <MenuList >
             <ProfileModal user={user}>
              <MenuItem>My Profile</MenuItem>
             </ProfileModal>
